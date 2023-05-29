@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<meta charset="UTF-8">
+	<meta name="author" content="LennieLiu">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+	<!-- HTML5 shim for IE8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="js/bootstrap/bootstrap.min.css">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/cart.css">
+
+</head>
+<body>
+	<div class="main" id="main">
+		<img class="bg" id="bg" src="" />
+
+		<div class="action">
+			<a href="javascript:void(0)" data-pid="1" onclick="addCart(this);">&nbsp;</a>
+			<a href="javascript:void(0)" data-pid="2" onclick="addCart(this);">&nbsp;</a>
+			<a href="javascript:void(0)" data-pid="3" onclick="addCart(this);">&nbsp;</a>
+			<a href="javascript:void(0)" data-pid="4" onclick="addCart(this);">&nbsp;</a>
+			<a href="category.html">&nbsp;</a>
+			<a href="" id="jump_btn">&nbsp;</a>
+		</div>
+	</div>
+
+	<div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			    <div class="modal-body" id="modal_tips">
+			        选择商品已经超过购物车上限！
+			    </div>
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#bg').attr('src', 'images/'+url_type+'/cart.png');
+			$('#jump_btn').attr('href', 'confirm.html?type='+url_type);
+		});
+
+		function addCart(obj) {
+			let id = url_type + '-' + $(obj).data('pid');
+			let cids = getCookie('cart_ids');
+
+			if (cids === null || cids.length == 0) {
+				cids = new Array();
+			} else {
+				if (-1 === cids.indexOf(',')) {
+					var t = new Array();
+					t.push(cids);
+					cids = t;
+				} else {
+					cids = cids.split(',');
+				}
+			}
+			
+			if (cids.length >= 4) {
+				$('#modal_tips').html('选择商品已经超过购物车上限！');
+				$('#exampleModal').modal('show');
+				return false;
+			}
+
+			if (-1 !== cids.indexOf(id+'')) {
+				$('#modal_tips').html('商品已添加');
+				$('#exampleModal').modal('show');
+				return false;
+			}
+
+			if (cids.length == 0 || -1 === cids.indexOf(id+'')) {
+				cids.push(id);
+				setCookie('cart_ids', cids.join(','));
+			}
+		}
+	</script>
+</body>
+</html>

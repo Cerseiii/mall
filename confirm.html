@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<meta charset="UTF-8">
+	<meta name="author" content="LennieLiu">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+	<!-- HTML5 shim for IE8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="js/bootstrap/bootstrap.min.css">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/confirm.css">
+
+</head>
+<body>
+	<div class="main">
+		<img class="bg" id="bg" src="images/confirm.png" />
+
+		<div class="goods-box" id="goods_box">
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+		</div>
+
+		<div class="action">
+			<a href="javascript:void(0)" id="jump_btn">&nbsp;</a>
+			<a href="javascript:void(0)" id="delete_btn">&nbsp;</a>
+		</div>
+	</div>
+
+	<div class="pop-modal" id="pop_modal">
+		<div class="content">
+			<img src="images/modal/redbag.png" />
+
+			<div class="action">
+				<a href="javascript:void(0);" onclick="showGoods();">&nbsp;</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			    <div class="modal-body" id="modal_tips">
+			        请先选择商品后再结算！
+			    </div>
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/common.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#bg').addClass('blur');
+
+			$('#jump_btn').click(function(){
+				let cids = getCookie('cart_ids');
+				if (cids === null || cids.length == 0) {
+					$('#exampleModal').modal('show');
+					return false;
+				}
+
+				window.location.href = 'success.html?type='+randomNum(1, 3);
+			});
+
+			$('#delete_btn').click(function(){
+				$('#goods_box>a').html('');
+				setCookie('cart_ids', '');
+			})
+		});
+
+		function showGoods()
+		{
+			$('#bg').removeClass('blur');
+			$('#pop_modal').hide();
+
+			let cids = getCookie('cart_ids');
+			if (cids === null || cids.length == 0) {
+				cids = new Array();
+			} else {
+				if (-1 === cids.indexOf(',')) {
+					var t = new Array();
+					t.push(cids);
+					cids = t;
+				} else {
+					cids = cids.split(',');
+				}
+			}
+
+			$.each(cids, function(key, val){
+				let item = val.split('-');
+
+				let html = '<img src="images/'+item[0]+'/list/'+item[1]+'.png">';
+				$('#goods_box>a').eq(key).html(html);
+			});
+		}
+	</script>
+</body>
+</html>
