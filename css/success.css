@@ -1,0 +1,9 @@
+.main>img.bg {
+    display: none;
+}
+
+.main>img.bg.active {
+    display: block;
+}
+
+

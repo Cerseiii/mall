@@ -1,0 +1,44 @@
+.main>.action {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 5rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main>.action>a {
+    position: absolute;
+    width: 15rem;
+    height: 6rem;
+}
+
+.main>.action>a:first-child {
+    top: 28%;
+}
+
+.main>.action>a:nth-child(2) {
+    top: 48%;
+}
+
+.main>.action>a:nth-child(3) {
+    bottom: 28%;
+}
+
+.main>.action>a:nth-child(4) {
+    bottom: 8%;
+}
+
+.main>.action>a:nth-child(5) {
+    bottom: 1.5%;
+    left: 13%;
+}
+
+.main>.action>a:nth-child(6) {
+    bottom: 1.5%;
+    right: -2%;
+}
+
