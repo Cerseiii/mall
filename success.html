@@ -27,9 +27,9 @@
 </head>
 <body>
 	<div class="main" id="main">
-		<img class="bg active" src="images/success1.png" />
-		<img class="bg" src="images/success2.png" />
-		<img class="bg" src="images/success3.png" />
+		<img class="bg active" src="images/success1.jpg" />
+		<img class="bg" src="images/success2.jpg" />
+		<img class="bg" src="images/success3.jpg" />
 	</div>
 
 	<script src="js/common.js"></script>
@@ -40,7 +40,16 @@
 				$('#main').find('img').removeClass('active');
 				$('#main').find('img').eq(url_type - 1).addClass('active');
 			}
+			
+			setTimeout("returnHome()", 10000);
 		});
+
+		// 返回首页
+		function returnHome(){
+			setCookie('cart_ids', '');
+
+		   	window.location.href = 'index.html';
+		}
 	</script>
 </body>
 </html>
