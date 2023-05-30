@@ -27,13 +27,13 @@
 </head>
 <body>
 	<div class="main" id="main">
-		<img class="bg" id="bg" src="" />
+		<img class="bg" id="bg" src="images/cart.jpg" />
 
-		<div class="action">
-			<a href="javascript:void(0)" data-pid="1" onclick="addCart(this);">&nbsp;</a>
-			<a href="javascript:void(0)" data-pid="2" onclick="addCart(this);">&nbsp;</a>
-			<a href="javascript:void(0)" data-pid="3" onclick="addCart(this);">&nbsp;</a>
-			<a href="javascript:void(0)" data-pid="4" onclick="addCart(this);">&nbsp;</a>
+		<div class="action" id="action_box">
+			<a href="javascript:void(0)" data-pid="1" onclick="addCart(this);"><img src="images/red/cart/1.png" /></a>
+			<a href="javascript:void(0)" data-pid="2" onclick="addCart(this);"><img src="images/red/cart/2.png" /></a>
+			<a href="javascript:void(0)" data-pid="3" onclick="addCart(this);"><img src="images/red/cart/3.png" /></a>
+			<a href="javascript:void(0)" data-pid="4" onclick="addCart(this);"><img src="images/red/cart/4.png" /></a>
 			<a href="category.html">&nbsp;</a>
 			<a href="" id="jump_btn">&nbsp;</a>
 		</div>
@@ -52,10 +52,13 @@
 		</div>
 	</div>
 
+	<div class="pop-modal" id="pop_modal">
+		<div class="alert alert-success" role="alert">加入购物车成功</div>
+	</div>
+
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#bg').attr('src', 'images/'+url_type+'/cart.png');
 			$('#jump_btn').attr('href', 'confirm.html?type='+url_type);
 		});
 
@@ -90,6 +93,9 @@
 			if (cids.length == 0 || -1 === cids.indexOf(id+'')) {
 				cids.push(id);
 				setCookie('cart_ids', cids.join(','));
+
+				$("#pop_modal").css('opacity', 1);
+				setTimeout('$("#pop_modal").css("opacity", 0);', 1500);
 			}
 		}
 	</script>
