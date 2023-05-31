@@ -29,11 +29,11 @@
 	<div class="main" id="main">
 		<img class="bg" id="bg" src="images/cart.jpg" />
 
-		<div class="goods-box">
-			<a href="javascript:void(0)" data-pid="1" onclick="addCart(this);"><img src="images/red/cart/1.png" /></a>
-			<a href="javascript:void(0)" data-pid="2" onclick="addCart(this);"><img src="images/red/cart/2.png" /></a>
-			<a href="javascript:void(0)" data-pid="3" onclick="addCart(this);"><img src="images/red/cart/3.png" /></a>
-			<a href="javascript:void(0)" data-pid="4" onclick="addCart(this);"><img src="images/red/cart/4.png" /></a>
+		<div class="goods-box" id="goods_box">
+			<a href="javascript:void(0)" data-pid="1" onclick="addCart(this);"><img src="" /></a>
+			<a href="javascript:void(0)" data-pid="2" onclick="addCart(this);"><img src="" /></a>
+			<a href="javascript:void(0)" data-pid="3" onclick="addCart(this);"><img src="" /></a>
+			<a href="javascript:void(0)" data-pid="4" onclick="addCart(this);"><img src="" /></a>
 		</div>
 		<div class="action" id="action_box">
 			<a href="category.html">&nbsp;</a>
@@ -62,6 +62,11 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#jump_btn').attr('href', 'confirm.html?type='+url_type);
+
+			$('#goods_box>a').each(function(key, val){
+				let path = 'images/'+url_type+'/cart/'+$(this).data('pid')+'.png';
+				$(this).find('img').attr('src', path);
+			})
 		});
 
 		function addCart(obj) {
